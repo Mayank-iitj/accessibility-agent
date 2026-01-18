@@ -1,0 +1,5 @@
+{
+  "name": "A11y-Agent",
+  "description": "An AI-powered web accessibility auditing agent that simulates disability personas to identify and fix issues.",
+  "requestFramePermissions": []
+}
