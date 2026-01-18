@@ -52,10 +52,13 @@ export const analyzeAccessibility = async (config: AuditConfig): Promise<Issue[]
 
   // Add screenshot if available
   if (config.screenshotBase64) {
+    const [header, base64Data] = config.screenshotBase64.split(',');
+    const mimeType = header.match(/:(.*?);/)?.[1] || 'image/png';
+
     prompts.push({
       inlineData: {
-        mimeType: 'image/png',
-        data: config.screenshotBase64.split(',')[1] // Remove data URL prefix
+        mimeType: mimeType,
+        data: base64Data
       }
     });
   }
