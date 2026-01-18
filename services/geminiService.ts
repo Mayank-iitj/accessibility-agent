@@ -1,4 +1,4 @@
-import { GoogleGenAI, Type, Chat } from "@google/genai";
+import { GoogleGenAI, Chat } from "@google/genai";
 import { Issue, Persona, AuditConfig } from '../types';
 
 // Initialize Gemini Client
@@ -13,7 +13,8 @@ Always be constructive, precise, and empathetic in your explanations.
 `;
 
 export const analyzeAccessibility = async (config: AuditConfig): Promise<Issue[]> => {
-  const model = 'gemini-3-flash-preview';
+  // Use gemini-3-pro-preview for complex tasks involving code and reasoning
+  const model = 'gemini-3-pro-preview';
   
   const prompts: any[] = [];
   
@@ -66,8 +67,9 @@ export const analyzeAccessibility = async (config: AuditConfig): Promise<Issue[]
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         responseMimeType: "application/json",
-        // We use a high token limit to allow detailed code fixes
-        maxOutputTokens: 8192, 
+        // When setting maxOutputTokens, we must also set thinkingConfig.thinkingBudget
+        maxOutputTokens: 8192,
+        thinkingConfig: { thinkingBudget: 2048 }
       }
     });
 
