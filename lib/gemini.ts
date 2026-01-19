@@ -50,10 +50,21 @@ export async function analyzeContent(content: string, type: 'text' | 'image' | '
         });
 
         const contentResponse = completion.choices[0]?.message?.content || "{}";
-        return JSON.parse(contentResponse);
+        console.log("[DEBUG] Raw API Response:", contentResponse);
+
+        try {
+            return JSON.parse(contentResponse);
+        } catch (parseError) {
+            console.error("[ERROR] JSON Parse Failed:", parseError);
+            console.error("[ERROR] Content was:", contentResponse);
+            return getMockResponse();
+        }
 
     } catch (error) {
         console.error("Groq Analysis Failed:", error);
+        if (error instanceof Error) {
+            console.error("Error details:", error.message, error.stack);
+        }
         return getMockResponse();
     }
 }

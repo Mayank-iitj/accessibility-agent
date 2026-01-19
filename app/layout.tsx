@@ -17,12 +17,12 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className="dark" suppressHydrationWarning>
             <body className={cn(
                 "min-h-screen font-sans antialiased selection:bg-primary/20",
                 fontHeading.variable,
                 fontBody.variable
-            )}>
+            )} suppressHydrationWarning>
                 <main className="relative flex min-h-screen flex-col overflow-hidden">
                     <div className="flex-1">
                         {children}

@@ -44,11 +44,6 @@ const nextConfig: NextConfig = {
         ]
       }
     ];
-  },
-
-  // Environment variable validation
-  env: {
-    GROQ_API_KEY: process.env.GROQ_API_KEY || '',
   }
 };
 
